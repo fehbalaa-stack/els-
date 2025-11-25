@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
   // Admin jogok
   role: { 
     type: String, 
-    default: 'user', // Alapból user, de átírhatod adminra a teszthez
+    default: 'admin', // Alapból user, de átírhatod adminra a teszthez
     enum: ['user', 'admin'] 
   },
   isBanned: { type: Boolean, default: false },
