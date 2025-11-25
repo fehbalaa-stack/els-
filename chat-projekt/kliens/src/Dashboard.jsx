@@ -99,6 +99,7 @@ const qrLink = "https://stupendous-crumble-108400.netlify.app/megtalaltam/" + pr
               </div>
                    
               {/* TÉRKÉP MEGJELENÍTÉS (Ha van GPS adat) */}
+ {profile?.location?.lat && profile?.location?.lng ? (
  <div style={{marginTop: '15px', background: '#e8f5e9', padding: '10px', borderRadius: '5px', border: '1px solid #c8e6c9'}}>
               <p style={{margin: '0 0 5px 0', color: 'green', fontWeight: 'bold'}}>📍 Utoljára látva itt:</p>
               
