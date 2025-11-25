@@ -72,7 +72,7 @@ function Register() {
         </form> 
         {/* <-- IDE VAN KIVÉVE A LINK: A FORM ALÁ, A FEHÉR DOBOZON BELÜL */}
         <p style={{marginTop: '20px', fontSize: '14px'}}>
-            Már van fiókod? <Link to="/login" style={{color: '#2196F3'}}>Lépj be itt!</Link>
+            Már van fiókod? <Link to="/login" style={{color: '#00f7d6ff'}}>Lépj be itt!</Link>
         </p>
 
       </div>
