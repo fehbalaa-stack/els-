@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 function Register() {
   const navigate = useNavigate();
@@ -50,6 +51,7 @@ function Register() {
         <p style={{ color: '#666', marginBottom: '20px', fontSize: '14px' }}>Add meg az adataidat a fiók létrehozásához.</p>
         
         <form onSubmit={onSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+          
           
           {/* SZEMÉLYES ADATOK */}
           <input type="text" placeholder="Teljes Neved (Szülő)" name="fullName" value={fullName} onChange={onChange} required style={inputStyle} />
