@@ -1,0 +1,4 @@
+[build]
+  base = "kliens"
+  publish = "kliens/build"
+  command = "npm run build"
