@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Register from './Register';
 import Dashboard from './Dashboard';
 import Megtalaltam from './Megtalaltam'; // 1. IMPORT
-import AdminPanel from './AdminPanel'; // <--- 1. EZT IMPORTÁLTUK ÚJONNAN
+import AdminPanel from './AdminPage';
 
 function App() {
   return (
