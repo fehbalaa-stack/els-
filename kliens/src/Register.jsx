@@ -51,9 +51,7 @@ function Register() {
         <p style={{ color: '#666', marginBottom: '20px', fontSize: '14px' }}>Add meg az adataidat a fiók létrehozásához.</p>
         
         <form onSubmit={onSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-          <p style={{marginTop: '20px', fontSize: '14px'}}>
-          Már van fiókod? <Link to="/login" style={{color: '#2196F3'}}>Lépj be itt!</Link>
-        </p>
+        
           
           {/* SZEMÉLYES ADATOK */}
           <input type="text" placeholder="Teljes Neved (Szülő)" name="fullName" value={fullName} onChange={onChange} required style={inputStyle} />
@@ -68,6 +66,9 @@ function Register() {
           
           <button type="submit" style={buttonStyle}>
             REGISZTRÁLÁS
+            <p style={{marginTop: '20px', fontSize: '14px'}}>
+          Már van fiókod? <Link to="/login" style={{color: '#2196F3'}}>Lépj be itt!</Link>
+        </p>
           </button>
         </form>
       </div>
