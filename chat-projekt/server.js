@@ -15,7 +15,7 @@ const server = http.createServer(app);
 // 4. ÚJ: Rákötjük a Socket.io-t a szerverre
 const io = new Server(server, {
   cors: {
-    origin: "http://10.199.99.94:3000", // Fontos: Csak a Frontendünk kapcsolódhat!
+    origin: "https://gyerek-tracker-backend.onrender.com", // Fontos: Csak a Frontendünk kapcsolódhat!
     methods: ["GET", "POST"]
   }
 });
