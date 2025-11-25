@@ -1,4 +1,0 @@
-[build]
-  base = "chat-projekt/kliens"
-  publish = "chat-projekt/kliens/dist"
-  command = "npm run build"
