@@ -99,7 +99,7 @@ const qrLink = "https://stupendous-crumble-108400.netlify.app/megtalaltam/" + pr
               </div>
                    
               {/* TÉRKÉP MEGJELENÍTÉS (Ha van GPS adat) */}
-            <div style={{marginTop: '15px', background: '#e8f5e9', padding: '10px', borderRadius: '5px', border: '1px solid #c8e6c9'}}>
+ <div style={{marginTop: '15px', background: '#e8f5e9', padding: '10px', borderRadius: '5px', border: '1px solid #c8e6c9'}}>
               <p style={{margin: '0 0 5px 0', color: 'green', fontWeight: 'bold'}}>📍 Utoljára látva itt:</p>
               
               {/* IDE TESSZÜK BE A TÉRKÉPET */}
@@ -111,18 +111,7 @@ const qrLink = "https://stupendous-crumble-108400.netlify.app/megtalaltam/" + pr
 
               <p style={{fontSize: '10px', color: '#666', margin: '5px 0 0 0'}}>
                 Frissítve: {new Date(profile.location.updatedAt).toLocaleTimeString()}
-              </p>
-              
-              {/* A régi Google Maps linket meghagyjuk alatta tartaléknak */}
-              <a 
-                href={`https://www.google.com/maps/search/?api=1&query=${profile.location.lat},${profile.location.lng}`}
-                target="_blank"
-                rel="noreferrer"
-                style={{fontSize: '11px', display: 'block', marginTop: '5px', color: '#2196F3'}}
-              >
-                Megnyitás Google Térképen ↗
-              </a>
-            </div>
+                 </p>
                 </div>
               ) : (
                 <p style={{fontSize: '12px', color: '#999', marginTop: '15px'}}>Még nincs GPS adat.</p>
