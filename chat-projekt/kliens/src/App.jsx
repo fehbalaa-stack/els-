@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Register from './Register';
 import Dashboard from './Dashboard';
-import Megtalaltam from './Megtalaltam'; // 1. IMPORT
-import AdminPanel from './AdminPage';
+import Megtalaltam from './Megtalaltam';
+import AdminPanel from './AdminPage'; // <--- FONTOS: Itt AdminPage legyen a vége!
 
 function App() {
   return (
@@ -10,9 +10,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        
-        {/* 2. ÚJ ÚTVONAL: A :id azt jelenti, hogy ott bármi állhat */}
         <Route path="/megtalaltam/:id" element={<Megtalaltam />} />
+        
+        {/* EZ A SOR KELL NEKÜNK NAGYON: */}
+        <Route path="/admin" element={<AdminPanel />} />
+        
       </Routes>
     </BrowserRouter>
   );
