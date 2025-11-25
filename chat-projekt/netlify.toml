@@ -1,4 +1,4 @@
 [build]
-  base = "kliens_biztos"
+  base = "kliens"
   publish = "kliens/build"
   command = "npm run build"
