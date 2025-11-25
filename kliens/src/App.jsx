@@ -1,20 +1,18 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Register from './Register';
-import Login from './Login'; // <--- ÚJ IMPORT
+import Login from './Login';
 import Dashboard from './Dashboard';
 import Megtalaltam from './Megtalaltam';
 import AdminPanel from './AdminPage';
+import Header from './Header'; // <-- ÚJ IMPORT
 
 function App() {
   return (
     <BrowserRouter>
+      <Header /> {/* <-- EZ MINDIG LÁTSZÓDIK */}
       <Routes>
-        {/* A Főoldal most a Regisztráció marad (vagy átírhatod Loginra) */}
         <Route path="/" element={<Register />} />
-        
-        {/* ÚJ ÚTVONAL: Belépés */}
         <Route path="/login" element={<Login />} />
-        
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/megtalaltam/:id" element={<Megtalaltam />} />
         <Route path="/admin" element={<AdminPanel />} />
