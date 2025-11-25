@@ -35,7 +35,7 @@ function Dashboard() {
 
   // NYOMTATÁS FUNKCIÓ
   const printQR = (profile) => {
-    const link = `https://gyerek-tracker-backend.onrender.com/megtalaltam/${profile._id}`;
+    const link = `https://gyerek-tracker-git-master-balint-shadowhands-fehers-projects.vercel.app/megtalaltam/${profile._id}`;
     // Egy új ablakot nyitunk, amibe írunk egy kis HTML-t
     const printWindow = window.open('', '', 'width=600,height=600');
     printWindow.document.write(`
@@ -79,7 +79,7 @@ function Dashboard() {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '20px' }}>
         {profiles.map(profile => {
           // FONTOS: A végére NEM kell perjel, de a /megtalaltam/ rész KELL!
-const qrLink = "https://stupendous-crumble-108400.netlify.app/megtalaltam/" + profile._id;
+const qrLink = "https://gyerek-tracker-git-master-balint-shadowhands-fehers-projects.vercel.app/megtalaltam/" + profile._id;
           return (
             <div key={profile._id} style={{ border: '1px solid #ddd', padding: '20px', borderRadius: '10px', textAlign: 'center', background: 'white' }}>
               <h2 style={{color: '#2196F3', marginTop: 0}}>{profile.childName}</h2>
