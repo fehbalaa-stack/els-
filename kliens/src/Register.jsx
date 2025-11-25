@@ -66,10 +66,18 @@ function Register() {
           
           <button type="submit" style={buttonStyle}>
             REGISZTRÁLÁS
-            <p style={{marginTop: '20px', fontSize: '14px'}}>
-          Már van fiókod? <Link to="/login" style={{color: '#2196F3'}}>Lépj be itt!</Link>
-        </p>
+          
           </button>
+          {/* ...inputok... */}
+
+        
+          {/* ÉS IDE TEDD A SZÖVEGET A GOMB ALÁ: */}
+          <p style={{marginTop: '20px', fontSize: '14px'}}>
+            Már van fiókod? <Link to="/login" style={{color: '#2196F3'}}>Lépj be itt!</Link>
+          </p>
+
+        </form>
+      </div>
         </form>
       </div>
     </div>
