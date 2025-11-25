@@ -79,5 +79,18 @@ router.post('/login', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+// --- ÚJ: FELHASZNÁLÓ ADATAINAK LEKÉRÉSE (ROLE CHECK) ---
+router.get('/me', auth, async (req, res) => {
+  try {
+    // A req.user.id-t a middleware adja hozzá a tokenből!
+    const user = await User.findById(req.user.id).select('role email fullName isPremium');
+    if (!user) {
+        return res.status(404).json({ msg: 'Felhasználó nem található.' });
+    }
+    res.json(user); // Visszaküldjük a jelenlegi jogokat
+  } catch (err) {
+    res.status(500).send('Szerver hiba');
+  }
+});
 
 module.exports = router;
