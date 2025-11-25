@@ -78,7 +78,7 @@ function Dashboard() {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '20px' }}>
         {profiles.map(profile => {
           // FONTOS: A végére NEM kell perjel, de a /megtalaltam/ rész KELL!
-const qrLink = `https://stupendous-crumble-108400.netlify.appmegtalaltam${profile._id}`;
+const qrLink = `stupendous-crumble-108400.netlify.app/megtalaltam${profile._id}`;
           return (
             <div key={profile._id} style={{ border: '1px solid #ddd', padding: '20px', borderRadius: '10px', textAlign: 'center', background: 'white' }}>
               <h2 style={{color: '#2196F3', marginTop: 0}}>{profile.childName}</h2>
