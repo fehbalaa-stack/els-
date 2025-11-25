@@ -62,3 +62,42 @@ function AdminPanel() {
               <th style={{padding: '10px'}}>Tel</th>
               <th style={{padding: '10px'}}>Státusz</th>
               <th style={{padding: '10px'}}>Prémium</th>
+              <th style={{padding: '10px'}}>Műveletek</th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.map(user => (
+              <tr key={user._id} style={{ borderBottom: '1px solid #ddd', background: user.isBanned ? '#ffebee' : 'white' }}>
+                <td style={{padding: '10px'}}>{user.fullName} <br/><span style={{fontSize:'10px', color:'#666'}}>{user.role}</span></td>
+                <td style={{padding: '10px'}}>{user.email}</td>
+                <td style={{padding: '10px'}}>{user.phoneNumber}</td>
+                
+                <td style={{padding: '10px'}}>
+                  {user.isBanned ? <span style={{color:'red', fontWeight:'bold'}}>BANNOLVA 🚫</span> : <span style={{color:'green'}}>Aktív ✅</span>}
+                </td>
+                
+                <td style={{padding: '10px'}}>
+                  {user.isPremium ? '⭐ PRO' : 'Ingyenes'}
+                </td>
+
+                <td style={{padding: '10px', display: 'flex', gap: '5px', flexWrap: 'wrap'}}>
+                  <button onClick={() => toggleBan(user._id)} style={{background: 'orange', color: 'white', border: 'none', padding: '5px', cursor: 'pointer'}}>
+                    {user.isBanned ? 'Feloldás' : 'Ban'}
+                  </button>
+                  <button onClick={() => togglePremium(user._id)} style={{background: 'purple', color: 'white', border: 'none', padding: '5px', cursor: 'pointer'}}>
+                    Prémium +/-
+                  </button>
+                  <button onClick={() => deleteUser(user._id)} style={{background: 'red', color: 'white', border: 'none', padding: '5px', cursor: 'pointer'}}>
+                    Törlés
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+export default AdminPanel;
