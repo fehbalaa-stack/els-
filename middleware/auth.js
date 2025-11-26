@@ -3,12 +3,14 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const auth = require('../middleware/auth'); // Szükséges az /me végponthoz
 
-// --- 1. REGISZTRÁCIÓ (Ez volt eddig is) ---
+// ----------------------------------------------------
+// 1. REGISZTRÁCIÓ
+// ----------------------------------------------------
 router.post('/register', async (req, res) => {
   try {
     const { email, password, fullName, phoneNumber, address } = req.body;
-
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ msg: 'Ez az email cím már foglalt!' });
@@ -27,17 +29,11 @@ router.post('/register', async (req, res) => {
     });
 
     const savedUser = await newUser.save();
-
     const token = jwt.sign({ id: savedUser._id }, "TITKOS_KULCS_123", { expiresIn: '1h' });
 
     res.json({
       token,
-      user: {
-        id: savedUser._id,
-        email: savedUser.email,
-        fullName: savedUser.fullName,
-        role: savedUser.role // Visszaküldjük a rangot is!
-      }
+      user: { id: savedUser._id, email: savedUser.email, fullName: savedUser.fullName, role: savedUser.role }
     });
 
   } catch (err) {
@@ -45,41 +41,38 @@ router.post('/register', async (req, res) => {
   }
 });
 
-// --- 2. ÚJ: BEJELENTKEZÉS (LOGIN) ---
+// ----------------------------------------------------
+// 2. BEJELENTKEZÉS
+// ----------------------------------------------------
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // Megnézzük, létezik-e ilyen felhasználó
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(400).json({ msg: 'Nincs ilyen felhasználó ezzel az emaillel.' });
+      return res.status(400).json({ msg: 'Hibás email vagy jelszó.' });
     }
 
-    // Ellenőrizzük a jelszót
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(400).json({ msg: 'Hibás jelszó!' });
+      return res.status(400).json({ msg: 'Hibás email vagy jelszó.' });
     }
 
-    // Ha minden oké, gyártunk egy tokent (belépőkártyát)
     const token = jwt.sign({ id: user._id }, "TITKOS_KULCS_123", { expiresIn: '1h' });
 
     res.json({
       token,
-      user: {
-        id: user._id,
-        email: user.email,
-        fullName: user.fullName,
-        role: user.role // Fontos: visszaküldjük, hogy admin-e!
-      }
+      user: { id: user._id, email: user.email, fullName: user.fullName, role: user.role }
     });
 
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
-// --- ÚJ: FELHASZNÁLÓ ADATAINAK LEKÉRÉSE (ROLE CHECK) ---
+
+// ----------------------------------------------------
+// 3. ADMIN JOG ELLENŐRZŐ (TEST VÉGPONT)
+// ----------------------------------------------------
 router.get('/me', auth, async (req, res) => {
   try {
     // A req.user.id-t a middleware adja hozzá a tokenből!
@@ -90,8 +83,12 @@ router.get('/me', auth, async (req, res) => {
     res.json(user); // Visszaküldjük a jelenlegi jogokat
   } catch (err) {
     res.status(500).send('Szerver hiba');
+  }
+});
 
-    // --- IDEIGLENES: JELSZÓ RESET ELFELEJTETT ADMINOKNAK ---
+// ----------------------------------------------------
+// 4. IDEIGLENES: JELSZÓ RESET ELFELEJTETT ADMINOKNAK
+// ----------------------------------------------------
 router.post('/debug-reset', async (req, res) => {
   try {
     // Keresd meg a felhasználót a címed alapján (HASZNÁLD A SAJÁT ADMIN EMAIL CÍMEDET!)
@@ -109,7 +106,6 @@ router.post('/debug-reset', async (req, res) => {
     res.status(500).send('Szerver hiba a resetelésnél');
   }
 });
-  }
-});
+
 
 module.exports = router;
