@@ -90,6 +90,25 @@ router.get('/me', auth, async (req, res) => {
     res.json(user); // Visszaküldjük a jelenlegi jogokat
   } catch (err) {
     res.status(500).send('Szerver hiba');
+
+    // --- IDEIGLENES: JELSZÓ RESET ELFELEJTETT ADMINOKNAK ---
+router.post('/debug-reset', async (req, res) => {
+  try {
+    // Keresd meg a felhasználót a címed alapján (HASZNÁLD A SAJÁT ADMIN EMAIL CÍMEDET!)
+    const user = await User.findOne({ email: 'admin-new@oldalam.hu' }); 
+    if (!user) return res.status(404).json({ msg: 'A felhasználó nem található' });
+
+    // ÚJ JELSZÓ HASHELÉSE: 12345
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash('12345', salt);
+    await user.save();
+    
+    // Figyelem: A jelszó mostantól 12345!
+    res.json({ msg: 'A jelszó resetelve: 12345. Mostantól be tudsz lépni!' });
+  } catch (err) {
+    res.status(500).send('Szerver hiba a resetelésnél');
+  }
+});
   }
 });
 
